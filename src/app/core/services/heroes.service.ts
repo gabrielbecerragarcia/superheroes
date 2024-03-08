@@ -21,6 +21,18 @@ export class SuperheroesService {
     return this.http.get<Superhero[]>(this.superheroesUrl);
   }
 
+  /**
+   * Get superhero by ID
+   */
+  getSuperheroById(id: string): Observable<Superhero | undefined> {
+    return this.http.get<Superhero[]>(this.superheroesUrl).pipe(
+      map(superheroes => superheroes.find(hero => hero.id === id))
+    );
+  }
+
+  /**
+   * Function to delete a superhero
+   */
   deleteHero(heroId: string): Observable<Superhero[]> {
     return this.getSuperheroes().pipe(
       map(superheroes => superheroes.filter(hero => hero.id !== heroId)),
@@ -29,11 +41,17 @@ export class SuperheroesService {
     );
   }
 
+
+  /**
+   * Function to save the superheroes
+   */
   private saveSuperheroes(superheroes: Superhero[]): void {
-    // Guardar la lista actualizada de superhéroes en el mock (podrías implementar una lógica de guardado real aquí)
     console.log('Superheroes actualizados:', superheroes);
   }
 
+  /**
+   * Function to handle Http operation that failed
+   */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
