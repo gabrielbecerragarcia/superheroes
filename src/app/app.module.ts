@@ -1,25 +1,20 @@
 // app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
-
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HomeHeroesComponent } from './modules/home-heroes/home-heroes.component';
-
-const routes: Routes = [
-  { path: '', component: HomeHeroesComponent },
-  // otras rutas aquí
-];
+import { AppRoutingModule } from './app-routing.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeHeroesComponent,
-    // otros componentes aquí
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule,
+    AppRoutingModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
