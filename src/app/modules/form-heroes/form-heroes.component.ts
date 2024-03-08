@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SuperheroesService } from 'src/app/core/services/heroes.service';
-import { Superhero } from 'src/app/core/models/superhero.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -29,7 +28,7 @@ export class FormHeroesComponent {
    */
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.heroId = params['id']; // Obtener el ID del héroe de la URL
+      this.heroId = params['id'];
 
       if (this.heroId === 'new') {
         this.isNewHero = true;
@@ -37,7 +36,7 @@ export class FormHeroesComponent {
         this.isNewHero = false;
       } else {
         this.isNewHero = true;
-        console.error('ID de héroe no válido:', this.heroId);
+        console.error('ID hero no valid:', this.heroId);
       }
 
       this.initializingForm();
@@ -47,8 +46,8 @@ export class FormHeroesComponent {
       }
 
       setTimeout(() => {
-        this.loading = false; // Oculta el loader después de que los datos se hayan cargado
-      }, 3000);
+        this.loading = false;
+      }, 2000);
 
     });
   }
@@ -98,7 +97,7 @@ export class FormHeroesComponent {
           }
         });
       } else {
-        console.error('ID de héroe no encontrado:', this.heroId);
+        console.error('ID hero not found:', this.heroId);
         this.isNewHero = true;
       }
     }, error => {
@@ -115,30 +114,30 @@ export class FormHeroesComponent {
   onSubmit(): void {
     if (this.heroForm.valid) {
       const formData = this.heroForm.value;
-      if (this.isNewHero) {
-        this.superheroService.getSuperheroes().subscribe(superheroes => {
+      let snackBarMessage = '';
+
+      this.superheroService.getSuperheroes().subscribe(superheroes => {
+        if (this.isNewHero) {
           superheroes.push(formData);
-          this.superheroService.saveSuperheroes(superheroes);
-          this.snackBar.open('Hero created successfully', 'Close', {
-            duration: 4000,
-            verticalPosition: 'top'
-          });
-        });
-      } else {
-        this.superheroService.getSuperheroes().subscribe(superheroes => {
+          snackBarMessage = 'Hero created successfully';
+        } else {
           const index = superheroes.findIndex(hero => hero.id === this.heroId);
           if (index !== -1) {
             superheroes[index] = formData;
-            this.superheroService.saveSuperheroes(superheroes);
-            this.snackBar.open('Hero edited successfully', 'Close', {
-              duration: 4000,
-              verticalPosition: 'top'
-            });
+            snackBarMessage = 'Hero edited successfully';
           }
-        });
-      }
+        }
 
-      this.router.navigate(['/']);
+        this.superheroService.saveSuperheroes(superheroes);
+        this.router.navigate(['/']);
+
+        if (snackBarMessage) {
+          this.snackBar.open(snackBarMessage, 'Close', {
+            duration: 4000,
+            verticalPosition: 'top'
+          });
+        }
+      });
     }
   }
 

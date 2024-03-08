@@ -1,0 +1,25 @@
+.dialog-title {
+  color: #333;
+  font-size: 20px;
+}
+
+.dialog-content {
+  color: #666;
+}
+
+.dialog-actions {
+  justify-content: flex-end;
+}
+
+.cancel-button {
+  color: #777;
+}
+
+.accept-button {
+  color: #fff;
+  background-color: #007bff;
+}
+
+.accept-button:hover {
+  background-color: #0056b3;
+}

@@ -28,7 +28,7 @@ export class HomeHeroesComponent {
     setTimeout(() => {
       this.getSuperheroes();
       this.loading = false;
-    }, 3000);
+    }, 2000);
   }
 
   /**

@@ -2,7 +2,7 @@
   <mat-spinner diameter="50"></mat-spinner>
 </div>
 <div class="form-container">
-  <h2>Superheroes</h2>
+  <h2>{{ this.isNewHero ? 'Create a new hero' : 'Edit hero' }}</h2>
   <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
     <div class="order-form">
       <mat-form-field appearance="fill" class="form-min">

@@ -8,7 +8,7 @@ describe('DefaultLayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule], // Añade esto
+      imports: [RouterTestingModule],
       declarations: [ DefaultLayoutComponent ]
     })
     .compileComponents();

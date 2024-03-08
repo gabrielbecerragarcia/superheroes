@@ -9,7 +9,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class SuperheroesService {
   private localStorageKey = 'superheroes';
-  private superheroesUrl = 'assets/superheroes.json'; // URL del archivo JSON de superhéroes (mock) Información de los superhéroes obtenida de la API https://superheroapi.com/
+  private superheroesUrl = 'assets/superheroes.json';
 
   constructor(
     private http: HttpClient

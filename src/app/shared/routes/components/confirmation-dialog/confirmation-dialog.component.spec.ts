@@ -11,7 +11,7 @@ describe('ConfirmationDialogComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
-        MatDialogModule // Añade esto
+        MatDialogModule
       ],
       declarations: [ConfirmationDialogComponent]
     });
