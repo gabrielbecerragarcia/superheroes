@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Superhero } from 'src/app/core/models/superhero.model';
 import { SuperheroesService } from 'src/app/core/services/heroes.service';
@@ -10,17 +9,34 @@ import { SuperheroesService } from 'src/app/core/services/heroes.service';
 })
 export class HomeHeroesComponent {
   superheroes: Superhero[] = [];
+  filteredSuperheroes: Superhero[] = [];
 
   constructor(private superheroesService: SuperheroesService) { }
 
+  /**
+   * ngOnInit get all superheroes when initializing component
+   */
   ngOnInit(): void {
     this.getSuperheroes();
   }
 
+  /**
+   * Call the service to get all the superheroes
+   */
   getSuperheroes(): void {
     this.superheroesService.getSuperheroes()
-      .subscribe(superheroes => {
-        this.superheroes = superheroes;
+      .subscribe(data => {
+        this.superheroes = data;
+        this.filteredSuperheroes = data;
       });
+  }
+
+  /**
+   * Filter superheroes based on search term
+   */
+  search(term: any): void {
+    this.filteredSuperheroes = this.superheroes.filter(hero =>
+      hero.name.toLowerCase().includes(term.target.value.toLowerCase())
+    );
   }
 }

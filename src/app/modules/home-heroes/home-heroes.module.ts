@@ -2,10 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeHeroesComponent } from './home-heroes.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
 
 const routes: Routes = [
   { path: '', component: HomeHeroesComponent },
@@ -19,6 +17,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MatCardModule,
+    MatInputModule
   ]
 })
 export class HomeHeroesModule { }

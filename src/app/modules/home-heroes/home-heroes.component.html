@@ -1,7 +1,10 @@
 <h2>Superheroes</h2>
-
+<mat-form-field appearance="fill">
+  <mat-label>Search</mat-label>
+  <input matInput type="text" (input)="search($event)" placeholder="Search">
+</mat-form-field>
 <div class="superheroes-container">
-  <mat-card *ngFor="let superhero of superheroes" class="superhero-card alternate-color">
+  <mat-card *ngFor="let superhero of filteredSuperheroes" class="superhero-card alternate-color">
     <mat-card-header>
       <mat-card-title>{{ superhero.name |titlecase }}</mat-card-title>
       <mat-card-subtitle>{{ superhero.biography.publisher }}</mat-card-subtitle>
