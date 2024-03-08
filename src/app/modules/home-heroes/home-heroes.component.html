@@ -3,6 +3,7 @@
   <mat-label>Search</mat-label>
   <input matInput type="text" (input)="search($event)" placeholder="Search">
 </mat-form-field>
+<button mat-button color="primary" (click)="editHero(null)">Create New</button>
 <div class="superheroes-container">
   <mat-card *ngFor="let superhero of filteredSuperheroes" class="superhero-card alternate-color">
     <mat-card-header>
@@ -18,6 +19,12 @@
         <li>Alignment: {{ superhero.biography.alignment }}</li>
         <li>Gender: {{ superhero.appearance.gender }}</li>
       </ul>
+      <button mat-icon-button color="primary" (click)="editHero(superhero)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" class="delete-button" (click)="deleteHero(superhero.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
     </mat-card-content>
   </mat-card>
 </div>
