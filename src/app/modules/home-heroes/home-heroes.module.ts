@@ -7,6 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmationDialogModule } from 'src/app/shared/routes/components/confirmation-dialog/confirmation-dialog.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const routes: Routes = [
   { path: '', component: HomeHeroesComponent },
@@ -23,7 +25,9 @@ const routes: Routes = [
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    ConfirmationDialogModule
+    ConfirmationDialogModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ]
 })
 export class HomeHeroesModule { }

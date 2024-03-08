@@ -5,5 +5,18 @@
  }
 
  .form-min {
-  width: 60%;
+  width: 100%;
  }
+
+ #name {
+  text-transform: uppercase;
+ }
+
+ 
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+}

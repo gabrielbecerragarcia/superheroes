@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Superhero } from 'src/app/core/models/superhero.model';
 import { SuperheroesService } from 'src/app/core/services/heroes.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/routes/components/confirmation-dialog/confirmation-dialog.component';
@@ -12,17 +13,22 @@ import { ConfirmationDialogComponent } from 'src/app/shared/routes/components/co
 export class HomeHeroesComponent {
   superheroes: Superhero[] = [];
   filteredSuperheroes: Superhero[] = [];
+  loading: boolean = true;
 
   constructor(
     private superheroesService: SuperheroesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
     ) { }
 
   /**
-   * ngOnInit get all superheroes when initializing component
+   * NgOnInit get all superheroes when initializing component
    */
   ngOnInit(): void {
-    this.getSuperheroes();
+    setTimeout(() => {
+      this.getSuperheroes();
+      this.loading = false;
+    }, 3000);
   }
 
   /**
@@ -41,6 +47,7 @@ export class HomeHeroesComponent {
    */
   search(term: Event): void {
     const value = (term.target as HTMLInputElement).value;
+
     this.filteredSuperheroes = this.superheroes.filter(hero =>
       hero.name.toLowerCase().includes(value.toLowerCase())
     );
@@ -59,6 +66,10 @@ export class HomeHeroesComponent {
           .subscribe(updatedSuperheroes => {
             this.superheroes = updatedSuperheroes;
             this.filteredSuperheroes = updatedSuperheroes;
+            this.snackBar.open('Hero deleted successfully', 'Close', {
+              duration: 4000,
+              verticalPosition: 'top'
+            });
           });
       }
     });

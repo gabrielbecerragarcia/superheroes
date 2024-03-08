@@ -2,7 +2,6 @@
   {
     "name": "thor",
     "id": "1",
-    "response": "success",
     "powerstats": {
       "intelligence": "38",
       "strength": "100",
@@ -17,9 +16,8 @@
     }
   },
   {
-    "name": "CATWOMAN",
+    "name": "Catwoman",
     "id": "27",
-    "response": "success",
     "powerstats": {
       "intelligence": "45",
       "strength": "97",
@@ -36,7 +34,6 @@
   {
     "name": "wonder woman",
     "id": "120",
-    "response": "success",
     "powerstats": {
       "intelligence": "63",
       "strength": "80",
@@ -51,7 +48,6 @@
     }
   },
   {
-    "response": "success",
     "id": "250",
     "name": "hulk",
     "powerstats": {

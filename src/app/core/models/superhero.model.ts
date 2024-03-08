@@ -1,7 +1,6 @@
 export interface Superhero {
   name: string;
   id: string;
-  response: string;
   powerstats: {
     intelligence: string | null;
     strength: string;

@@ -1,54 +1,59 @@
-<form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
-  <div class="order-form">
-    <mat-form-field appearance="fill" class="form-min">
-      <mat-label>ID</mat-label>
-      <input matInput formControlName="id" placeholder="ID">
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="form-min">
-      <mat-label>Name</mat-label>
-      <input matInput formControlName="name" placeholder="Name">
-    </mat-form-field>
-
-    <div formGroupName="powerstats">
-      <mat-form-field appearance="fill"  class="form-min">
-        <mat-label>Intelligence</mat-label>
-        <input matInput formControlName="intelligence" placeholder="Intelligence">
+<div *ngIf="loading" class="loader-container">
+  <mat-spinner diameter="50"></mat-spinner>
+</div>
+<div class="form-container">
+  <h2>Superheroes</h2>
+  <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
+    <div class="order-form">
+      <mat-form-field appearance="fill" class="form-min">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id" placeholder="ID">
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="form-min">
-        <mat-label>Strength</mat-label>
-        <input matInput formControlName="strength" placeholder="Strength">
+        <mat-label>Name</mat-label>
+        <input id="name" matInput formControlName="name" placeholder="Name">
       </mat-form-field>
 
-      <mat-form-field  class="form-min">
-        <mat-label>Power</mat-label>
-        <input matInput formControlName="power" placeholder="Power">
-      </mat-form-field>
+      <div formGroupName="powerstats">
+        <mat-form-field appearance="fill" class="form-min">
+          <mat-label>Intelligence</mat-label>
+          <input matInput formControlName="intelligence" placeholder="Intelligence">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-min">
+          <mat-label>Strength</mat-label>
+          <input matInput formControlName="strength" placeholder="Strength">
+        </mat-form-field>
+
+        <mat-form-field class="form-min">
+          <mat-label>Power</mat-label>
+          <input matInput formControlName="power" placeholder="Power">
+        </mat-form-field>
+      </div>
+
+      <div formGroupName="biography">
+        <mat-form-field class="form-min">
+          <mat-label>Publisher</mat-label>
+          <input matInput formControlName="publisher" placeholder="Publisher">
+        </mat-form-field>
+
+        <mat-form-field class="form-min">
+          <mat-label>Alignment</mat-label>
+          <input matInput formControlName="alignment" placeholder="Alignment">
+        </mat-form-field>
+      </div>
+
+      <div formGroupName="appearance">
+        <mat-form-field class="form-min">
+          <mat-label>Gender</mat-label>
+          <input matInput formControlName="gender" placeholder="Gender">
+        </mat-form-field>
+      </div>
+
+      <button class="form-min" mat-raised-button color="primary" type="submit">Save</button>
+      <button type="button" class="form-min" mat-button color="warn" (click)="goBack()">Back</button>
     </div>
 
-    <div formGroupName="biography">
-      <mat-form-field  class="form-min">
-        <mat-label>Publisher</mat-label>
-        <input matInput formControlName="publisher" placeholder="Publisher">
-      </mat-form-field>
-
-      <mat-form-field  class="form-min">
-        <mat-label>Alignment</mat-label>
-        <input matInput formControlName="alignment" placeholder="Alignment">
-      </mat-form-field>
-    </div>
-
-    <div formGroupName="appearance">
-      <mat-form-field  class="form-min">
-        <mat-label>Gender</mat-label>
-        <input matInput formControlName="gender" placeholder="Gender">
-      </mat-form-field>
-    </div>
-
-    <button class="form-min" mat-raised-button color="primary" type="submit">Guardar</button>
-    <button class="form-min" mat-button color="warn" (click)="goBack()">Volver</button>
-  </div>
-
-</form>
-
+  </form>
+</div>

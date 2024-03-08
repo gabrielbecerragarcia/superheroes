@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SuperheroesService } from 'src/app/core/services/heroes.service';
 import { Superhero } from 'src/app/core/models/superhero.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-form-heroes',
@@ -10,16 +11,23 @@ import { Superhero } from 'src/app/core/models/superhero.model';
   styleUrls: ['./form-heroes.component.css']
 })
 export class FormHeroesComponent {
-  isNewHero: boolean = true;
+  isNewHero: boolean = false;
   heroId: string = '';
   heroForm: FormGroup = {} as FormGroup;
+  loading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private superheroService: SuperheroesService,
-    private router: Router
-    ) {
+    private router: Router,
+    private snackBar: MatSnackBar
+    ) { }
+
+  /**
+   * ngOnInit get all superheroes when initializing component
+   */
+  ngOnInit() {
     this.route.params.subscribe(params => {
       this.heroId = params['id']; // Obtener el ID del héroe de la URL
 
@@ -31,17 +39,18 @@ export class FormHeroesComponent {
         this.isNewHero = true;
         console.error('ID de héroe no válido:', this.heroId);
       }
-    });
-  }
 
-  /**
-   * ngOnInit get all superheroes when initializing component
-   */
-  ngOnInit() {
-    this.initializingForm();
-    if (!this.isNewHero) {
-      this.getHeroInfo();
-    }
+      this.initializingForm();
+
+      if (!this.isNewHero) {
+        this.getHeroInfo();
+      }
+
+      setTimeout(() => {
+        this.loading = false; // Oculta el loader después de que los datos se hayan cargado
+      }, 3000);
+
+    });
   }
 
   /**
@@ -92,6 +101,11 @@ export class FormHeroesComponent {
         console.error('ID de héroe no encontrado:', this.heroId);
         this.isNewHero = true;
       }
+    }, error => {
+      this.snackBar.open('Error', 'Close', {
+        duration: 2000,
+        verticalPosition: 'top'
+      });
     });
   }
 
@@ -105,6 +119,10 @@ export class FormHeroesComponent {
         this.superheroService.getSuperheroes().subscribe(superheroes => {
           superheroes.push(formData);
           this.superheroService.saveSuperheroes(superheroes);
+          this.snackBar.open('Hero created successfully', 'Close', {
+            duration: 4000,
+            verticalPosition: 'top'
+          });
         });
       } else {
         this.superheroService.getSuperheroes().subscribe(superheroes => {
@@ -112,6 +130,10 @@ export class FormHeroesComponent {
           if (index !== -1) {
             superheroes[index] = formData;
             this.superheroService.saveSuperheroes(superheroes);
+            this.snackBar.open('Hero edited successfully', 'Close', {
+              duration: 4000,
+              verticalPosition: 'top'
+            });
           }
         });
       }
