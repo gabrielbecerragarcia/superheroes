@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Superhero } from '../models/superhero.model';
 
@@ -20,4 +19,5 @@ export class SuperheroesService {
   getSuperheroes(): Observable<Superhero[]> {
     return this.http.get<Superhero[]>(this.superheroesUrl);
   }
+
 }

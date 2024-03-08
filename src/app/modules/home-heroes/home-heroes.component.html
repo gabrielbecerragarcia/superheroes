@@ -1,10 +1,23 @@
-<h2>Listado de Superhéroes</h2>
-<ul>
-  <li *ngFor="let superhero of superheroes">
-    <img [src]="superhero.image.url" alt="{{ superhero.name }}">
-    <h3>{{ superhero.name }}</h3>
-    <p>Gender: {{ superhero.appearance.gender }}</p>
-    <p>Intelligence: {{ superhero.powerstats.intelligence }}</p>
-  </li>
-</ul>
+<h2>Superheroes</h2>
+
+<div class="superheroes-container">
+  <mat-card *ngFor="let superhero of superheroes" class="superhero-card alternate-color">
+    <mat-card-header>
+      <mat-card-title>{{ superhero.name |titlecase }}</mat-card-title>
+      <mat-card-subtitle>{{ superhero.biography.publisher }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <ul>
+        <li>Intelligence: {{ superhero.powerstats.intelligence }}</li>
+        <li>Strength: {{ superhero.powerstats.strength }}</li>
+        <li>Intelligence: {{ superhero.powerstats.strength }}</li>
+        <li>Power: {{ superhero.powerstats.power }}</li>
+        <li>Alignment: {{ superhero.biography.alignment }}</li>
+        <li>Gender: {{ superhero.appearance.gender }}</li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
 
