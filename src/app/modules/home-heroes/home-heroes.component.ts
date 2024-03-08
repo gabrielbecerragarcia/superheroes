@@ -47,9 +47,6 @@ export class HomeHeroesComponent {
 
   }
 
-  editHero(hero: any) {
-  }
-
   /**
    *  Function to delete a superhero
    */

@@ -44,14 +44,10 @@
         <mat-label>Gender</mat-label>
         <input matInput formControlName="gender" placeholder="Gender">
       </mat-form-field>
-
-      <mat-form-field  class="form-min">
-        <mat-label>Race</mat-label>
-        <input matInput formControlName="race" placeholder="Race">
-      </mat-form-field>
     </div>
 
     <button class="form-min" mat-raised-button color="primary" type="submit">Guardar</button>
+    <button class="form-min" mat-button color="warn" (click)="goBack()">Volver</button>
   </div>
 
 </form>

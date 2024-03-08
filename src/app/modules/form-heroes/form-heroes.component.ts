@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SuperheroesService } from 'src/app/core/services/heroes.service';
 import { Superhero } from 'src/app/core/models/superhero.model';
@@ -17,7 +17,8 @@ export class FormHeroesComponent {
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private superheroService: SuperheroesService
+    private superheroService: SuperheroesService,
+    private router: Router
     ) {
     this.route.params.subscribe(params => {
       this.heroId = params['id']; // Obtener el ID del héroe de la URL
@@ -50,7 +51,6 @@ export class FormHeroesComponent {
     this.heroForm = this.fb.group({
       name: ['', Validators.required],
       id: ['', Validators.required],
-      response: ['', Validators.required],
       powerstats: this.fb.group({
         intelligence: [''],
         strength: ['', Validators.required],
@@ -58,11 +58,10 @@ export class FormHeroesComponent {
       }),
       biography: this.fb.group({
         publisher: ['', Validators.required],
-        alignment: ['', Validators.required]
+        alignment: ['']
       }),
       appearance: this.fb.group({
-        gender: ['', Validators.required],
-        race: ['']
+        gender: [''],
       })
     });
   }
@@ -72,12 +71,10 @@ export class FormHeroesComponent {
    */
   getHeroInfo(): void {
     this.superheroService.getSuperheroById(this.heroId).subscribe(hero => {
-      console.log('Heroe:', hero);
       if (hero) {
         this.heroForm.patchValue({
           name: hero.name,
           id: hero.id,
-          response: hero.response,
           powerstats: {
             intelligence: hero.powerstats.intelligence,
             strength: hero.powerstats.strength,
@@ -89,7 +86,6 @@ export class FormHeroesComponent {
           },
           appearance: {
             gender: hero.appearance.gender,
-            race: hero.appearance.race
           }
         });
       } else {
@@ -99,15 +95,35 @@ export class FormHeroesComponent {
     });
   }
 
-  onSubmit() {
+  /**
+   * Function to submit the form
+   */
+  onSubmit(): void {
     if (this.heroForm.valid) {
+      const formData = this.heroForm.value;
       if (this.isNewHero) {
-        // Lógica para crear un nuevo héroe
+        this.superheroService.getSuperheroes().subscribe(superheroes => {
+          superheroes.push(formData);
+          this.superheroService.saveSuperheroes(superheroes);
+        });
       } else {
-        // Lógica para editar el héroe existente
+        this.superheroService.getSuperheroes().subscribe(superheroes => {
+          const index = superheroes.findIndex(hero => hero.id === this.heroId);
+          if (index !== -1) {
+            superheroes[index] = formData;
+            this.superheroService.saveSuperheroes(superheroes);
+          }
+        });
       }
-    } else {
-      // El formulario no es válido, muestra mensajes de error o realiza otras acciones
+
+      this.router.navigate(['/']);
     }
+  }
+
+  /**
+   * Function to go back
+   */
+  goBack(): void {
+    window.history.back();
   }
 }

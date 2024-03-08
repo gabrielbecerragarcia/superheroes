@@ -13,7 +13,6 @@ export interface Superhero {
   };
   appearance: {
     gender: string;
-    race: string | null;
   };
 }
 

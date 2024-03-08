@@ -44,7 +44,7 @@
     },
     "biography": {
       "publisher": "Marvel Comics",
-      "alignment": "bad"
+      "alignment": "good"
     },
     "appearance": {
       "gender": "Female"
@@ -61,7 +61,7 @@
     },
     "biography": {
       "publisher": "Dc Comics",
-      "alignment": "bad"
+      "alignment": "good/bad"
     },
     "appearance": {
       "gender": "Male"

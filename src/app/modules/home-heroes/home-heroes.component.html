@@ -3,11 +3,11 @@
   <mat-label>Search</mat-label>
   <input matInput type="text" (input)="search($event)" placeholder="Search">
 </mat-form-field>
-<button mat-button color="primary" routerLink="/form/new">Create New</button>
-<div class="superheroes-container">
+<button mat-raised-button color="primary" routerLink="/form/new">Create New</button>
+<div class="superheroes-container" *ngIf="filteredSuperheroes">
   <mat-card *ngFor="let superhero of filteredSuperheroes" class="superhero-card alternate-color">
     <mat-card-header>
-      <mat-card-title>{{ superhero.name |titlecase }}</mat-card-title>
+      <mat-card-title>{{ superhero.name | titlecase }}</mat-card-title>
       <mat-card-subtitle>{{ superhero.biography.publisher }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
@@ -19,7 +19,7 @@
         <li>Alignment: {{ superhero.biography.alignment }}</li>
         <li>Gender: {{ superhero.appearance.gender }}</li>
       </ul>
-      <button mat-icon-button color="primary" (click)="editHero(superhero)">
+      <button mat-icon-button color="primary" [routerLink]="['/form', superhero.id]">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button color="warn" class="delete-button" (click)="deleteHero(superhero.id)">
